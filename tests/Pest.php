@@ -11,6 +11,7 @@
 |
 */
 
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 uses(Tests\TestCase::class)->in('Feature');
@@ -26,8 +27,16 @@ uses(Tests\TestCase::class)->in('Feature');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
+expect()->extend('toBeRedirectedFor', function (string $url, string $method = 'get') {
+
+    $response = null;
+    if (!$this->value) {
+        $response = test()->{$method}($url);
+    } else {
+        $response = actingAs($this->value)
+            ->{$method}($url);
+    }
+    return $response->assertStatus(302);
 });
 
 /*
@@ -43,5 +52,10 @@ expect()->extend('toBeOne', function () {
 
 function actingAs(Authenticatable $user)
 {
-   return test()->actingAs($user);
+    return test()->actingAs($user);
+}
+
+function expectGuest()
+{
+    return test()->expect(null);
 }

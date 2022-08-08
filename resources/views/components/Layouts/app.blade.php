@@ -32,7 +32,7 @@
                     <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">My books</a>
                 </li>
                 <li>
-                    <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Add a book</a>
+                    <a href="/books/create" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Add a book</a>
                 </li>
 
                 <li>
@@ -43,7 +43,13 @@
 
             <ul>
                 <li>
-                    <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Logout</a>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
+                            Logout
+                        </button>
+                    </form>
+
                 </li>
 
             </ul>
@@ -59,7 +65,8 @@
             </ul>
             <ul>
                 <li>
-                    <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Login</a>
+                    <a href="/auth/login"
+                       class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Login</a>
                 </li>
                 <li>
                     <a href="/auth/register" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">Register</a>
@@ -76,7 +83,10 @@
                 {{$header}}
             </h1>
         @endisset
-        {{$slot}}
+        <div class="mt-8">
+            {{$slot}}
+        </div>
+
     </div>
 
 </div>

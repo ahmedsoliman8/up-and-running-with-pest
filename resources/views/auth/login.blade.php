@@ -1,15 +1,10 @@
 <x-layouts.app>
     <x-slot name="header">
-        Sign up
+        Log In
     </x-slot>
 
-    <form action="/register" method="post" class="mt-4 space-y-4">
+    <form action="/login" method="post" class="mt-4 space-y-4">
         @csrf
-
-        <div class="space-y-1">
-            <label for="name" class="block">Your name</label>
-            <input type="text" name="name" id="name" placeholder="e.g. Mabel" class="rounded block w-full">
-        </div>
 
         <div class="space-y-1">
             <label for="email" class="block">Email address</label>
@@ -22,13 +17,10 @@
             <input type="password" name="password" id="password" class="rounded block w-full">
         </div>
 
-        <div class="space-y-1">
-            <label for="password_confirmation" class="block">Password Confirmation</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" class="rounded block w-full">
-        </div>
+
 
         <button type="submit" class="bg-slate-200 px-3 py-2 rounded">
-            Create account
+            Log in
         </button>
     </form>
     </x-layouts-app>

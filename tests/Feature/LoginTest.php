@@ -5,16 +5,23 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 
 uses(RefreshDatabase::class);
 
 
+
+
+it('shows the login page')->get('/auth/login')->assertOk();
+
+
+
+
+
 it('redirects authenticated user', function () {
 
-    actingAs( User::factory()->create())
-        ->get('auth/login')
-        ->assertStatus(302);
+
+    expect(User::factory()->create())->toBeRedirectedFor('/auth/login');
 });
 
 it('shows an  errors if the details are not provided')

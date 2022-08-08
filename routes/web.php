@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookCreateController;
+use App\Http\Controllers\BookStoreController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterIndexController;
@@ -21,3 +23,8 @@ Route::get('/', HomeController::class);
 Route::get('/auth/register', RegisterIndexController::class);
 
 Route::get('/auth/login', LoginController::class);
+
+
+Route::post('/books', BookStoreController::class);
+
+Route::get('/books/create', BookCreateController::class);

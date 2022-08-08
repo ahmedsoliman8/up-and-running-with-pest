@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RegisterIndexController extends Controller
+class BookCreateController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware(['guest']);
+        $this->middleware(['auth']);
     }
+
     public function __invoke()
     {
-        return view('auth.register');
+
+        return view('books.create');
+
     }
 }
