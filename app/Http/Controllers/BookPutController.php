@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookPutRequest;
 use App\Models\Book;
 use App\Models\Pivot\BookUser;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class BookStoreController extends Controller
+class BookPutController extends Controller
 {
 
     public function __construct()
@@ -16,12 +16,13 @@ class BookStoreController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function __invoke(BookStoreRequest $request)
+    public function __invoke(Book $book, BookPutRequest $request)
     {
-        $book = Book::create($request->only('title', 'author'));
-        $request->user()->books()->attach($book, [
+        $book->update($request->only('title', 'author'));
+        $request->user()->books()->updateExistingPivot($book, [
             'status' => $request->status
         ]);
         return redirect('/');
+
     }
 }

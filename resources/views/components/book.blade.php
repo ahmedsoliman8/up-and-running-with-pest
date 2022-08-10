@@ -8,7 +8,7 @@
     @isset($links)
 
         <div>
-            {{$links}}
+            <a class="text-blue-500 text-sm" href="/books/{{$book->id}}/edit">Edit</a>
         </div>
 
     @endisset
