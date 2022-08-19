@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Staudenmeir\LaravelMergedRelations\Eloquent\HasMergedRelationships;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,HasMergedRelationships,HasRelationships;
 
     /**
      * The attributes that are mass assignable.
@@ -55,10 +57,10 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function getFriendsAttribute()
+    public function friends()
     {
 
-        return $this->acceptedFriendsOfMine->merge($this->acceptedFriendsOf);
+        return $this->mergedRelationWithModel(User::class,'friends_view');
     }
 
 
@@ -112,8 +114,18 @@ class User extends Authenticatable
     public function removeFriend(User $friend)
     {
 
+
         $this->friendsOfMine()->detach($friend);
+        $this->friendsOf()->detach($friend);
     }
+
+
+    public  function  booksOfFriends(){
+        return $this->hasManyDeepFromRelations($this->friends(),(new User())->books())
+            ->withIntermediate(BookUser::class)
+            ->orderBy('__book_user__updated_at','desc');
+    }
+
 }
 
 

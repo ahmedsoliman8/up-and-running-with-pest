@@ -10,7 +10,9 @@
         "laravel/fortify": "^1.13",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "staudenmeir/eloquent-has-many-deep": "^1.7",
+        "staudenmeir/laravel-merged-relations": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
